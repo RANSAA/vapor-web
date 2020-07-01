@@ -1,0 +1,62 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    //tasks Run
+    {
+      "label": "swift-build",
+      "type": "shell",
+      "command": "swift build"
+    },
+    //tasks Test
+    {
+      "label": "swift-tests",
+      "type": "process",
+      "command": "swift",
+      "group": "build",
+      "args": [
+          "build",
+          "--build-tests"
+         // for TensorFlow add "-Xlinker", "-ltensorflow"
+      ]
+    },
+    //tasks Claen
+    {
+      "label": "swift-clean",
+      "type": "shell",
+      "command":[
+        "rm -rf",
+        "${workspaceFolder}/Products",
+        "${workspaceFolder}/.build/x86_64-unknown-linux-gnu",
+        "${workspaceFolder}/.build/x86_64-apple-macosx",
+        "${workspaceFolder}/.build/debug",
+        "${workspaceFolder}/.build/release"
+      ]
+    },    
+    //tasks Release
+    {
+      "label": "swift-release",
+      "type": "shell",
+      "linux":{
+        "command":[
+          "swift build -c debug\n",//可修改为release模式
+          "mkdir -p ${workspaceFolder}/Products\n",
+          "cp -rf ${workspaceFolder}/.build/debug/Run ${workspaceFolder}/Products\n",//路径可以切换为release，路径与swift build模式要匹配
+          "cp -rf ${workspaceFolder}/Public ${workspaceFolder}/Products\n",
+          "cp -rf ${workspaceFolder}/Resources ${workspaceFolder}/Products\n",
+          "nautilus ${workspaceFolder}/Products"
+        ]
+      },
+      "osx":{
+        "command":[
+          "swift build -c release\n",
+          "mkdir -p ${workspaceFolder}/Products\n",
+          "cp -rf ${workspaceFolder}/.build/release/Run ${workspaceFolder}/Products\n",
+          "cp -rf ${workspaceFolder}/Public ${workspaceFolder}/Products\n",
+          "cp -rf ${workspaceFolder}/Resources ${workspaceFolder}/Products\n",
+          "open ${workspaceFolder}/Products"
+        ]
+      }
+    }
+
+  ]
+}

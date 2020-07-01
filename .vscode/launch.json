@@ -1,0 +1,53 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        //运行
+        {
+            "type": "lldb",
+            "name": "Run",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/.build/debug/Run",
+            "preLaunchTask": "swift-build",
+            "args": ["serve","--hostname","0.0.0.0","--port","8080"]
+        },
+        //测试
+        {
+            "type": "lldb",
+            "name": "Test",
+            "request":"launch",
+            "cwd": "${workspaceFolder}",
+            "program": "",
+            "linux": {
+                "program": "${workspaceFolder}/.build/x86_64-unknown-linux-gnu/debug/appPackageTests.xctest",//YourPackageTests.xctest
+            },
+            "osx": {
+                "program": "/Applications/Xcode.app/Contents/Developer/usr/bin/xctest",
+                "args": [
+                    "${workspaceFolder}/.build/debug/webPackageTests.xctest"//YourPackageTests.xctest
+                ]
+            },
+            "preLaunchTask": "swift-tests"
+        },
+        //Clean: 
+        {
+            "type": "lldb",
+            "name": "Clean",
+            "request":"custom",
+            "preLaunchTask": "swift-clean",
+        },
+         //构建发行: 
+        //    MacOS下为Release版本,
+        //    Linux下为Debug版本(Release会出错，可能是当前项目影响，需要更具具体情况调节)
+        {
+            "type": "lldb",
+            "name": "Release",
+            "request":"custom",
+            "preLaunchTask": "swift-release",
+        }    
+        
+    ]
+}

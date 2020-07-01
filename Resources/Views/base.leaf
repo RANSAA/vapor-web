@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>#import("title")</title>
+	<link rel="stylesheet" href="/styles/app.css">
+    <link rel="shortcut icon" href="/images/favicon.png">
+</head>
+<body>
+    #import("body")
+</body>
+</html>

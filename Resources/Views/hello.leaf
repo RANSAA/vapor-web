@@ -1,0 +1,14 @@
+#extend("base"):
+    #export("title"):
+        Hello, #(name)
+    #endexport
+    #export("body"):
+        <h1 align="center">Hello, #(name)!</h1>
+    #endexport
+
+#endextend
+
+
+
+
+

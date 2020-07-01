@@ -1,0 +1,9 @@
+#set("title") { Hello, #(name)! }
+
+#set("body") {
+	<h1>Hello 33333, #(name)!</h1>
+}
+
+
+
+#embed("base")
