@@ -21,15 +21,15 @@ public func configure(_ app: Application) throws {
     app.middleware.use(corsMiddleware)
 
    
-
-
-    
     //register leaf
     app.views.use(.leaf)
     app.leaf.cache.isEnabled = false
     
 
-    
+    //hostname port
+    app.http.server.configuration.port = 8080;
+    app.http.server.configuration.hostname = "0.0.0.0"
+
 
     // register routes
     try routes(app)
